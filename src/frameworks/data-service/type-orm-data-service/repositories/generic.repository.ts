@@ -1,5 +1,5 @@
 import { IGenericRepository } from "../../../../service-modules/data-service/interfaces/generic-repository.interface";
-import { FindOptionsWhere, Repository } from "typeorm";
+import { DeepPartial, FindOptionsWhere, Repository } from "typeorm";
 import { AbstractEntity } from "../entities/abstract.entity";
 
 export class GenericRepository<T extends AbstractEntity> implements IGenericRepository<T> {
@@ -9,6 +9,10 @@ export class GenericRepository<T extends AbstractEntity> implements IGenericRepo
 
     findOneById(id: string): Promise<T> {
         return this._repository.findOneBy({ id } as FindOptionsWhere<T>);
+    }
+
+    save<U extends DeepPartial<T>>(item: U): Promise<T> {
+        return this._repository.save(item);
     }
 
 }
