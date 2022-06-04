@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: postgres
+    restart: unless-stopped
+    ports:
+      - $PGSQL_PORT:5432
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+    # TODO: WHEN IN PRODUCTION, CHECK HOW TO ACTUALLY CONFIGURE THE ROOT USER
+    # THIS IS ROOT USER \/\/
+      POSTGRES_USER: $PGSQL_USER
+      POSTGRES_PASSWORD: $PGSQL_PASS
+      POSTGRES_DB: $PGSQL_DB
+
+volumes:
+  db_data:
+    driver: local
