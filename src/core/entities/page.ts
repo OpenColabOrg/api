@@ -1,6 +1,6 @@
 import { Tag } from "./tag";
 
-export class Document {
+export class Page {
     id: string;
 
     createdAt: Date;

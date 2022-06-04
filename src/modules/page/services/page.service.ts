@@ -1,20 +1,20 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
-import { IDocumentsService } from "./documents.service.interface";
+import { IPageService } from "./page.service.interface";
 import { IDataService } from "../../../service-modules/data-service/interfaces";
-import { Document } from "../../../core/entities/document";
+import { Page } from "../../../core/entities/page";
 import { isUUID } from "@nestjs/common/utils/is-uuid";
 
 @Injectable()
-export class DocumentsService implements IDocumentsService {
+export class PageService implements IPageService {
 
     constructor(protected readonly dataService: IDataService) {
     }
 
-    getDocumentById(id: string): Promise<Document> {
+    getDocumentById(id: string): Promise<Page> {
         if(!isUUID(id))
         {
             throw new BadRequestException("Invalid UUID")
         }
-        return this.dataService.documents.findOneById(id);
+        return this.dataService.pages.findOneById(id);
     }
 }
